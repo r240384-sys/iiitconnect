@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IIIT Connect - Login</title>
+    <link rel="icon" href="images/logo.png" type="image/png">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: radial-gradient(circle at top right, #f1f5f9, #e2e8f0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .login-card {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: var(--shadow-lg);
+            width: 100%;
+            max-width: 400px;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .error-msg {
+            color: #ef4444;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="loader"></div>
+    </div>
+    <script>
+        window.addEventListener('load', () => {
+            const preloader = document.getElementById('preloader');
+            preloader.classList.add('fade-out');
+            setTimeout(() => {
+                preloader.style.display = 'none';
+            }, 500);
+        });
+    </script>
+
+    <div class="login-card">
+        <div style="text-align: center; margin-bottom: 30px;">
+            <img src="images/logo.png" alt="IIIT Connect" style="width: 80px; margin-bottom: 15px;">
+            <h2 style="font-family: 'Playfair Display', serif;">Student Login</h2>
+            <p style="color: var(--text-light);">Welcome to IIIT Connect</p>
+        </div>
+
+        <div id="error-message" class="error-msg">Invalid Credentials</div>
+
+        <form id="login-form">
+            <input type="hidden" id="campus-select" value="rkvalley">
+
+            <div class="form-group">
+                <label>Student ID</label>
+                <input type="text" id="student-id" class="form-control" placeholder="e.g. R123456" required>
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="password" class="form-control" placeholder="Enter your password" required>
+            </div>
+            <button type="submit" class="btn btn-primary" style="width: 100%;">Login</button>
+        </form>
+    </div>
+
+    <!-- Data Logic -->
+    <script src="js/users.js"></script>
+    <script src="admin/js/db_sync.js"></script>
+
+    <script>
+        // Init DB to load fresh data if any
+        if (typeof DBSync !== 'undefined') DBSync.init();
+
+        const loginForm = document.getElementById('login-form');
+
+        // Check URL params for campus selection
+        const urlParams = new URLSearchParams(window.location.search);
+        const campusParam = urlParams.get('campus');
+
+        if (campusParam) {
+            const select = document.getElementById('campus-select');
+            const studentIdInput = document.getElementById('student-id');
+            const passwordInput = document.getElementById('password');
+
+            if (select) {
+                if (campusParam === 'rkv' || campusParam === 'rkvalley') {
+                    select.value = 'rkvalley';
+                    if (studentIdInput) studentIdInput.placeholder = "e.g. R123456";
+                    if (passwordInput) passwordInput.placeholder = "e.g. rkvR123456";
+                } else if (campusParam === 'ong' || campusParam === 'ongole') {
+                    select.value = 'ong';
+                    if (studentIdInput) studentIdInput.placeholder = "e.g. O180234";
+                    if (passwordInput) passwordInput.placeholder = "e.g. ongO180234";
+                }
+            }
+        }
+
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const campus = document.getElementById('campus-select').value;
+            const studentId = document.getElementById('student-id').value.trim().toUpperCase();
+            const password = document.getElementById('password').value;
+            const errorMessage = document.getElementById('error-message');
+
+            const result = validateLogin(studentId, password, campus);
+
+            if (result.success) {
+                // Check against Dynamic DB (window.users)
+                // DBSync init ensures window.users is populated from LS or file
+                localStorage.setItem('user', JSON.stringify(result.user));
+                window.location.href = 'dashboard.html?year=puc2';
+            } else {
+                errorMessage.innerText = result.message || "Invalid Credentials.";
+                errorMessage.style.display = 'block';
+
+                // Shake animation for feedback
+                const card = document.querySelector('.login-card');
+                card.style.transform = 'translateX(10px)';
+                setTimeout(() => card.style.transform = 'translateX(-10px)', 100);
+                setTimeout(() => card.style.transform = 'translateX(0)', 200);
+            }
+        });
+    </script>
+</body>
+
+</html>

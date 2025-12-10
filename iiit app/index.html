@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IIIT Connect - Campus Selection</title>
+    <link rel="icon" href="images/logo.png" type="image/png">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Data Scripts -->
+    <script src="js/users.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/timetable_data.js"></script>
+    <script src="admin/js/db_sync.js"></script>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="loader"></div>
+    </div>
+    <script>
+        window.addEventListener('load', () => {
+            const preloader = document.getElementById('preloader');
+            preloader.classList.add('fade-out');
+            setTimeout(() => {
+                preloader.style.display = 'none';
+            }, 500);
+        });
+    </script>
+
+    <div class="hero">
+        <div class="container"
+            style="display: flex; align-items: center; justify-content: space-between; height: 100%;">
+            <div class="hero-content">
+                <h1 style="color: var(--primary-dark);">Welcome to<br>IIIT Connect</h1>
+                <p>Your collaborative academic platform. Access timetables, syllabus, resources, and more in one place.
+                </p>
+                <div style="margin-top: 30px;">
+                    <a href="campus.html" class="btn btn-primary"
+                        style="padding: 15px 40px; font-size: 1.1rem; box-shadow: var(--shadow-lg);">
+                        Login to Portal <i class="fas fa-arrow-right" style="margin-left: 10px;"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="hero-image" style="flex: 1; display: flex; justify-content: center;">
+                <div
+                    style="width: 350px; height: 350px; background: linear-gradient(135deg, #e0f2fe, #f0f9ff); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-lg);">
+                    <i class="fas fa-graduation-cap" style="font-size: 8rem; color: var(--primary-color);"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+</body>
+
+</html>

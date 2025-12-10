@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IIIT Connect - Select Campus</title>
+    <link rel="icon" href="images/logo.png" type="image/png">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: radial-gradient(circle at center, #f8fafc, #e2e8f0);
+            flex-direction: column;
+        }
+
+        .header-section {
+            text-align: center;
+            margin-bottom: 50px;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        /* Coming Soon Badge */
+        .coming-soon-badge {
+            display: inline-block;
+            background: var(--secondary-color);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-top: 5px;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .campus-card.disabled {
+            filter: grayscale(1);
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        .campus-card.disabled:hover {
+            transform: none;
+            box-shadow: var(--shadow-soft);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="loader"></div>
+    </div>
+    <script>
+        window.addEventListener('load', () => {
+            const preloader = document.getElementById('preloader');
+            preloader.classList.add('fade-out');
+            setTimeout(() => {
+                preloader.style.display = 'none';
+            }, 500);
+        });
+    </script>
+
+    <div class="container">
+        <div class="header-section">
+            <h1
+                style="margin-bottom: 15px; color: var(--text-dark); font-size: 2.5rem; font-family: var(--font-heading); letter-spacing: -0.02em;">
+                Select Your Campus</h1>
+            <p style="font-size: 1.1rem; color: var(--text-light);">Choose your IIIT campus to access your academic
+                dashboard</p>
+        </div>
+
+        <!-- Campus Grid Container -->
+        <div class="campus-container"
+            style="width: 100%; display: flex; justify-content: center; align-items: center; padding: 40px 20px; overflow-x: auto;">
+            <div class="campus-grid"
+                style="display: flex; flex-wrap: nowrap; gap: 40px; justify-content: center; padding-bottom: 20px;">
+
+                <!-- RK Valley (Active) -->
+                <a href="login.html?campus=rkv" class="campus-card animate-delay-1"
+                    style="animation: fadeIn 0.6s ease-out forwards; opacity: 0; display: flex; flex-direction: column; width: 220px; flex-shrink: 0; text-decoration: none; border-radius: 30px; overflow: hidden; box-shadow: var(--shadow-not-hover); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);">
+                    <div class="campus-img"
+                        style="height: 140px; background: linear-gradient(135deg, #3b82f6, #1d4ed8); color: white; display: flex; align-items: center; justify-content: center; position: relative;">
+                        <!-- Uniform Logo -->
+                        <div
+                            style="width: 60px; height: 60px; background: rgba(255,255,255,0.25); border-radius: 50%; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(5px);">
+                            <i class="fas fa-university" style="font-size: 1.8rem;"></i>
+                        </div>
+                    </div>
+                    <div class="campus-info" style="padding: 15px; flex: 1; background: white; text-align: center;">
+                        <div class="campus-name"
+                            style="font-size: 1.1rem; color: var(--text-dark); margin-bottom: 5px; font-weight: 700;">RK
+                            Valley</div>
+                        <div class="campus-location"
+                            style="color: var(--text-light); font-size: 0.8rem; margin-bottom: 10px;">Idupulapaya</div>
+                        <span
+                            style="display: inline-block; padding: 4px 12px; background: #eff6ff; color: var(--primary-color); border-radius: 15px; font-size: 0.7rem; font-weight: 600;">Active
+                            Portal</span>
+                    </div>
+                </a>
+
+                <!-- Nuzvid (Coming Soon) -->
+                <div class="campus-card disabled animate-delay-2"
+                    style="animation: fadeIn 0.6s ease-out forwards; opacity: 0; display: flex; flex-direction: column; width: 220px; flex-shrink: 0; border-radius: 30px; overflow: hidden; box-shadow: var(--shadow-soft); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);">
+                    <div class="campus-img"
+                        style="height: 140px; background: linear-gradient(135deg, #f59e0b, #d97706); color: white; display: flex; align-items: center; justify-content: center;">
+                        <div
+                            style="width: 60px; height: 60px; background: rgba(255,255,255,0.25); border-radius: 50%; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(5px);">
+                            <i class="fas fa-university" style="font-size: 1.8rem;"></i>
+                        </div>
+                    </div>
+                    <div class="campus-info" style="padding: 15px; flex: 1; background: #fffbeb; text-align: center;">
+                        <!-- Light yellow bg -->
+                        <div class="campus-name"
+                            style="font-size: 1.1rem; color: var(--text-dark); margin-bottom: 5px; font-weight: 600;">
+                            Nuzvid</div>
+                        <div class="campus-location"
+                            style="color: var(--text-light); font-size: 0.8rem; margin-bottom: 10px;">Krishna District
+                        </div>
+                        <div class="coming-soon-badge"
+                            style="background: rgba(245, 158, 11, 0.2); color: #b45309; font-size: 0.7rem; padding: 3px 10px;">
+                            Coming Soon</div>
+                    </div>
+                </div>
+
+                <!-- Srikakulam (Coming Soon) -->
+                <div class="campus-card disabled animate-delay-3"
+                    style="animation: fadeIn 0.6s ease-out forwards; opacity: 0; display: flex; flex-direction: column; width: 220px; flex-shrink: 0; border-radius: 30px; overflow: hidden; box-shadow: var(--shadow-soft); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);">
+                    <div class="campus-img"
+                        style="height: 140px; background: linear-gradient(135deg, #10b981, #059669); color: white; display: flex; align-items: center; justify-content: center;">
+                        <div
+                            style="width: 60px; height: 60px; background: rgba(255,255,255,0.25); border-radius: 50%; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(5px);">
+                            <i class="fas fa-university" style="font-size: 1.8rem;"></i>
+                        </div>
+                    </div>
+                    <div class="campus-info" style="padding: 15px; flex: 1; background: #ecfdf5; text-align: center;">
+                        <!-- Light green bg -->
+                        <div class="campus-name"
+                            style="font-size: 1.1rem; color: var(--text-dark); margin-bottom: 5px; font-weight: 600;">
+                            Srikakulam</div>
+                        <div class="campus-location"
+                            style="color: var(--text-light); font-size: 0.8rem; margin-bottom: 10px;">Etcherla</div>
+                        <div class="coming-soon-badge"
+                            style="background: rgba(16, 185, 129, 0.2); color: #047857; font-size: 0.7rem; padding: 3px 10px;">
+                            Coming Soon</div>
+                    </div>
+                </div>
+
+                <!-- Ongole (Coming Soon) -->
+                <!-- Ongole (Active) -->
+                <a href="login.html?campus=ong" class="campus-card animate-delay-4"
+                    style="animation: fadeIn 0.6s ease-out forwards; opacity: 0; display: flex; flex-direction: column; width: 220px; flex-shrink: 0; text-decoration: none; border-radius: 30px; overflow: hidden; box-shadow: var(--shadow-not-hover); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);">
+                    <div class="campus-img"
+                        style="height: 140px; background: linear-gradient(135deg, #8b5cf6, #7c3aed); color: white; display: flex; align-items: center; justify-content: center;">
+                        <div
+                            style="width: 60px; height: 60px; background: rgba(255,255,255,0.25); border-radius: 50%; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(5px);">
+                            <i class="fas fa-university" style="font-size: 1.8rem;"></i>
+                        </div>
+                    </div>
+                    <div class="campus-info" style="padding: 15px; flex: 1; background: #f5f3ff; text-align: center;">
+                        <!-- Light purple bg -->
+                        <div class="campus-name"
+                            style="font-size: 1.1rem; color: var(--text-dark); margin-bottom: 5px; font-weight: 600;">
+                            Ongole</div>
+                        <div class="campus-location"
+                            style="color: var(--text-light); font-size: 0.8rem; margin-bottom: 10px;">Prakasam District
+                        </div>
+                        <span
+                            style="display: inline-block; padding: 4px 12px; background: #ede9fe; color: #6d28d9; border-radius: 15px; font-size: 0.7rem; font-weight: 600;">Active
+                            Portal</span>
+                    </div>
+                </a>
+            </div>
+
+            <style>
+                .campus-card:hover {
+                    transform: translateY(-15px) scale(1.05);
+                    /* Pop up animation */
+                    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+                    z-index: 10;
+                }
+
+                .campus-container::-webkit-scrollbar {
+                    display: none;
+                }
+
+                .campus-container {
+                    -ms-overflow-style: none;
+                    scrollbar-width: none;
+                }
+            </style>
+        </div>
+    </div>
+</body>
+
+</html>
